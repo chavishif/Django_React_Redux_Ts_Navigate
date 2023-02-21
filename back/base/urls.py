@@ -17,6 +17,8 @@ urlpatterns = [
     path('gallery/<pk>', views.GalleryView.as_view()),
     path('profile/', views.ProfileView.as_view()),
     path('profile/<pk>', views.ProfileView.as_view()),
+    path('albums/', views.AlbumsView.as_view()),
+    path('albumstype/', views.AlbumsTypeView.as_view()),
     path('login/', views.MyTokenObtainPairView.as_view()),
     path('login/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('register/', views.register),

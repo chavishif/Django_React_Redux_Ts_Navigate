@@ -12,6 +12,8 @@ from rest_framework.views import APIView
 from .models import Product
 from .models import Gallery
 from .models import Profile
+from .models import Albums
+from .models import AlbumsType
 
 import os
 
@@ -186,3 +188,42 @@ class ProfileView(APIView):
    
 
 # Profile CRUD - end
+
+
+# ----------------------------------------Albums crud -start---------------------------------------------------------
+
+class AlbumsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Albums
+        fields = '__all__'
+
+    
+@permission_classes([IsAuthenticated])
+class AlbumsView(APIView):
+
+    def get(self, request):
+            usr = request.user
+            my_model = usr.albums_set.all()
+            serializer = AlbumsSerializer(my_model, many=True)
+            return Response(serializer.data)
+    
+# ----------------------------------------Albums crud -end---------------------------------------------------------
+
+# ----------------------------------------Albums type crud -start---------------------------------------------------------
+
+class AlbumsTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AlbumsType
+        fields = '__all__'
+
+    
+@permission_classes([IsAuthenticated])
+class AlbumsTypeView(APIView):
+
+    def get(self, request):
+            usr = request.user
+            my_model = usr.albumstypes_set.all()
+            serializer = AlbumsTypeSerializer(my_model, many=True)
+            return Response(serializer.data)
+    
+# ----------------------------------------Albums type crud -end---------------------------------------------------------

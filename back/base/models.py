@@ -33,3 +33,13 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+
+
+class Albums(models.Model):
+    user = models.ForeignKey(User, related_name='albums_set', on_delete=models.CASCADE)
+    desc = models.TextField(max_length=500, blank=True)
+
+class AlbumsType(models.Model):
+    user = models.ForeignKey(User, related_name='albumstypes_set', on_delete=models.CASCADE)
+    desc = models.TextField(max_length=500, blank=True)
+    catId = models.ForeignKey(Albums, on_delete=models.CASCADE)

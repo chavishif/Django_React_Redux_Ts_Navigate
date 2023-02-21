@@ -1,12 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { selectUsername } from '../features/login/loginSlice';
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
+import { selectAccess } from '../features/login/loginSlice'
+import { getalbumsAsync } from '../features/albums/albumsSlice';
+
 
 const Albums = () => {
   let albums = [{ id: 1, desc: "trips" }, { id: 2, desc: "friends" }, { id: 3, desc: "family" }]
   const username = useAppSelector(selectUsername);
+  const access = useAppSelector(selectAccess);
+  const dispatch = useAppDispatch();
 
+
+  
+
+useEffect(() => {
+  dispatch(getalbumsAsync(access))
+}, [])
   return (
     <div>
       <br></br>
